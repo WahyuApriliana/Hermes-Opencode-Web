@@ -1,0 +1,10 @@
+services:
+  aimind-web:
+    build: .
+    container_name: aimind-web
+    ports:
+      # 8080 → 80 (Nginx)
+      - "8080:80"
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Jakarta
