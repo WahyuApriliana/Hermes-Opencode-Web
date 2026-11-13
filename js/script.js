@@ -129,4 +129,25 @@
   function hideFeedback() {
     formFeedback.textContent = "";
   }
+
+  // ----- Tema gelap/terang -----
+  const storedTheme = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isDark = storedTheme === 'dark' || (storedTheme !== 'light' && prefersDark);
+  if (isDark) {
+    document.documentElement.classList.add('dark');
+  }
+
+  const themeToggle = document.getElementById('themeToggle');
+  function applyTheme(dark) {
+    document.documentElement.classList.toggle('dark', dark);
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+    themeToggle.textContent = dark ? '☀️' : '🌙';
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function () {
+      applyTheme(!document.documentElement.classList.contains('dark'));
+    });
+  }
 })();
